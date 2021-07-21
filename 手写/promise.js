@@ -59,6 +59,19 @@ const resolve = 'RESOLVE';
 const reject = 'REJECT';
 const isFunc = (fn) => typeof fn === 'function';
 class MyPromise {
+  static resolve() {
+    // TODO:
+  }
+  static reject() {
+    // TODO:
+  }
+  static all() {
+    // TODO:
+  }
+  static race() {
+    // TODO:
+  }
+
   constructor(executor) {
     this._state = pending;
     this._value;
@@ -66,6 +79,7 @@ class MyPromise {
     this._onRejectedQueue = [];
     executor(this._onResolved.bind(this), this._onRejected.bind(this));
   }
+
   _onResolved(value) {
     // 执行的时候，状态 变为 resolve，再执行 then 中的回到
     if (this._state !== pending) return;
@@ -87,6 +101,9 @@ class MyPromise {
 
     this._value = value;
     this._state = reject;
+    if (this._onRejectedQueue.length === 0) {
+      throw new Error('unHandle Promise rejected');
+    }
     const run = () => {
       let cb;
       while ((cb = this._onRejectedQueue.shift())) {
@@ -126,10 +143,14 @@ class MyPromise {
           this._onResolvedQueue.push(_onRejected);
           break;
         case resolve:
-          _onResolve(this._value);
+          setTimeout(() => {
+            _onResolve(this._value);
+          });
           break;
         case reject:
-          _onRejected(this._value);
+          setTimeout(() => {
+            _onRejected(this._value);
+          });
           break;
       }
     });
