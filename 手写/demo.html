@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="d1" style="background: red">ddd</div>
+    <button onclick="foo()">click me</button>
+    <script>
+      function foo() {
+        const run = () => {
+          const dd1 = document.getElementById('d1');
+          const newNode = document.createElement('div');
+          const textNode = document.createTextNode('hello world');
+          newNode.appendChild(textNode);
+          dd1.appendChild(newNode);
+          console.log(d1.offsetHeight);
+        };
+        let array = Array(100);
+        for (let index = 0; index < array.length; index++) {
+          run();
+        }
+      }
+    </script>
+  </body>
+</html>
