@@ -111,3 +111,5 @@ console.log(mergeTimeRanges());
   - redux 的数据流,是同步还是异步的,如何处理异步逻辑，applyMiddleware 的机制
   - proxy 层其实 antd 是有配置可以直接支持的
   - history.back() 会刷新页面吗?
+
+二面挂了，回答的不好，特别是 redux 的详细追问，react-router keep-alive 的对 包拆分的影响的了解不足，体现出来就是没有技术深度，了解不够
