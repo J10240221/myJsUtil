@@ -1,9 +1,0 @@
-- 自我介绍
-- cookie, session, sessionStory, localStore 的区别
-- typescript 的感受
-- webpack 常见的 plugin 和 loader，已经有实现过吗?
-- 跨域的情况，和如何处理
-- react 常用的 hook
-- react 服务端渲染的了解
-- 微前端的理解
-- spa 的理解，优缺点
