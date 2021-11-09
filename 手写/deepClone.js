@@ -19,12 +19,16 @@ const isArrOrObj = (obj) => isArray(obj) || isObject(obj);
  * @param {*} needDeep
  * @param {*} cache
  */
-const clone = (obj, needDeep = true, cache = new Set()) => {
+const clone = (obj, needDeep = true, cache = new Map()) => {
   if (!isArrOrObj(obj)) return obj;
 
-  cache.add(obj);
-
   let ret = Array.isArray(obj) ? [] : {};
+
+  if (cache.get(obj)) {
+    /* 避免循环引用 */
+    return cache.get(obj);
+  }
+  cache.set(obj, ret);
 
   Object.entries(obj).forEach(([key, val]) => {
     if (val instanceof Date) {
@@ -33,12 +37,9 @@ const clone = (obj, needDeep = true, cache = new Set()) => {
       val = new RegExp(val);
     }
 
-    const shouldDeep =
-      isArrOrObj(val) &&
-      needDeep &&
-      /* 避免循环引用 */
-      !cache.has(val);
+    const shouldDeep = isArrOrObj(val) && needDeep;
 
+    // 因为这里是第一层的拷贝，不需要 深度 clone 则直接返回当前的属性即可，
     ret[key] = shouldDeep ? clone(val, needDeep, cache) : val;
   });
 
@@ -59,5 +60,6 @@ const ac2 = clone(a, false);
 console.log(a);
 console.log(ac);
 console.log(ac2);
-console.log(a.d === ac.d);
-console.log(a.d === ac2.d);
+console.log(a.d === ac.d); // should be false
+console.log(a.d === ac2.d); // should be true
+console.log(a.tar === ac.tar); // should be false
