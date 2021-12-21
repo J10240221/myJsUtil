@@ -1,0 +1,50 @@
+{
+  // "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "globals": {
+    "DingTalkPC": false,
+    "window": true,
+    "document": true,
+    "location": true,
+    "localStorage": true,
+    "$": true,
+    "_": true,
+    "__LOCAL__": true,
+    "__isDevSmsEnvironment__": true,
+    "qiankun": true,
+    "util": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "amd": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    // "comma-dangle": 1,
+    // "quotes": [ 1, "single" ],
+    "no-shadow": 1, // disallow variable declarations from shadowing variables declared in the outer scope
+    "no-undef": 2,
+    "global-strict": 0,
+    "no-extra-semi": 1,
+    "no-underscore-dangle": 0, // 禁止标识符中有悬空下划线_bar
+    "no-console": 2, // 禁用 console
+    "no-debugger": 2, // 禁用 debugger
+    // "no-unused-vars": 1,
+    // "no-trailing-spaces": [1, { "skipBlankLines": true }],
+    "no-unreachable": 1,
+    "no-alert": 0,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/jsx-key": 1
+    // "react-hooks/rules-of-hooks": 2, // error
+    // "react-hooks/exhaustive-deps": 1 // warn
+  }
+}
