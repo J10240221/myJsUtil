@@ -55,7 +55,7 @@ function coinChange(coins: number[], amount: number): number {
    * 如 coins = [2,3] , amount = 5
    *           0 1 2 3 4 5
    * (2) 0     0 0 1 0 2 0
-   * (3) 1     0 0 1 1 2 1
+   * (3) 1     0 0 1 1 2 2
    *
    * f金额 = 某1种情况 + min{ f（金额 - 某1种的金额）}
    *
@@ -82,7 +82,7 @@ function coinChange(coins: number[], amount: number): number {
   return bestCase.get(amount) ?? -1;
 }
 
-const coins = [1];
-const amount = 0;
+const coins = [2, 3];
+const amount = 5;
 
 console.log(coinChange(coins, amount));

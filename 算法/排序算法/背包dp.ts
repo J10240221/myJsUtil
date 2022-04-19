@@ -1,7 +1,10 @@
 /**
  *
+ * 题目：
+ * 对于一组不同重量、不可分割的物品，我们需要选择一些装入背包，在满足背包最大重量限制的前提下，背包中物品总重量的最大值是多少呢？
  * @param weight 物品重量
  * @param w 背包可承载重量
+ * 
  * 
  * 如果 weight = [2,4]； w = 5
  *  
@@ -25,7 +28,7 @@ function knapsack(weight: number[], w: number) {
   // 物品数量
   const count = weight.length;
   const dp: (true | undefined)[][] = [];
-  // 初始化 dp 数据,并完成 第一行数据的填充
+  // 初始化 dp 数据,并完成 第一列数据的填充
   weight.forEach((e, i) => {
     dp.push([true]); // 第一个点 代表 0重量 肯定是 真
     if (i === 0) {
@@ -39,10 +42,10 @@ function knapsack(weight: number[], w: number) {
     for (let col = 0; col <= w; col++) {
       const prvRow_colVal = dp[row - 1][col];
       if (prvRow_colVal) {
-        dp[row][col] = prvRow_colVal; // 这个物品，【不】装入 背包
+        dp[row][col] = prvRow_colVal; // 这个物品，【不装】入背包
 
         if (col + weight[row] <= w) {
-          dp[row][col + weight[row]] = true; // 这个物品，装入 背包
+          dp[row][col + weight[row]] = true; // 这个物品，【装】入背包
         }
       }
     }
