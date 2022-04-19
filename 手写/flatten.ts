@@ -3,7 +3,7 @@
  * @param arr
  * @param depth
  */
-const flatten = (arr: any[], depth = 1) => {
+const flatten = (arr: any[], depth = Number.MAX_VALUE) => {
   let ret: any[] = [];
 
   arr.forEach((item) => {
@@ -17,6 +17,11 @@ const flatten = (arr: any[], depth = 1) => {
   return ret;
 };
 
-const aa = [[1, 2], [3, 4, [5]], [6]];
+const aa = [
+  [1, 1],
+  [1, 1, [2, [3, [4]]]],
+];
 
-console.log(flatten(aa));
+console.log(flatten(aa, 1));
+console.log(flatten(aa, 2));
+console.log(flatten(aa, 4));
