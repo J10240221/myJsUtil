@@ -24,7 +24,7 @@
  */
 
 /**
-1 由于 要去重，所以需要先排序,然后利用双指针 去处理，顶住 i， 然后依次 使用 left = i+1;right=len -1;
+1 由于 要去重，所以需要先排序,然后利用双指针 去处理，定住 i， 然后依次 使用 left = i+1;right=len -1;
  */
 function threeSum(nums: number[]): number[][] {
   nums.sort((a, b) => a - b);
