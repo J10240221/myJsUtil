@@ -1,3 +1,6 @@
+// 进入 类型文件的入口
+type A = Required<{}>
+
 type Partial<T> = { [P in keyof T]?: T[P] };
 
 type Required<T> = { [P in keyof T]-?: T[P] };
