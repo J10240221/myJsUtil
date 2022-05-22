@@ -1,5 +1,23 @@
-// dp[r][c] = min(左上， 左，上) + 1
+
+
+// const matrix = [
+//   ["1", "0", "0"],
+//   ["1", "1", "1"],
+//   ["1", "1", "1"],
+//   ["0", "1", "0"],
+// ];
+// const dpDemo = [
+//   [1, 0, 0],
+//   [1, 1, 1],
+//   [1, 2, 2],
+//   [0, 1, 0],
+// ];
+
+// 核心：dp[r][c] = min(左上， 左，上) + 1
 // 抄的
+// 来源：力扣（LeetCode）
+// 链接：https://leetcode.cn/problems/maximal-square
+// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 function maximalSquare(matrix: string[][]): number {
   if (matrix == null || matrix.length < 1 || matrix[0].length < 1) return 0;
 

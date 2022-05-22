@@ -7,18 +7,13 @@ cookies[j]: 饼干尺寸
 
 先排序
 用最小需求的小孩，去消费，最小的饼干，如果不满足，消费第二小的，
-
-
-①cookies[j] === children[i] 肯定是 最优解，
-②其次 cookies[j] >= children[i] 大1点点，
-再次 cookies[j] >= children[i] 大2点点
  */
 function findContentChildren(children: number[], cookies: number[]): number {
   const orderChild = [...children].sort((a, b) => a - b);
   let orderCookies = [...cookies].sort((a, b) => a - b); // 避免修改 入参
   console.log(orderChild);
   console.log(orderCookies);
-  let happyChildCount = 0;
+
   // 消费饼干
   let childIndex = 0;
   let cookieIndex = 0;
@@ -36,4 +31,5 @@ function findContentChildren(children: number[], cookies: number[]): number {
 
 const chi = [10, 9, 8, 7];
 const coo = [5, 6, 7, 8];
+
 findContentChildren(chi, coo);

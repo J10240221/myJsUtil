@@ -44,7 +44,7 @@ function lengthOfLIS(nums: number[]): number {
       }
       const isLast = retIndex === len - 1;
       if (isLast) {
-        // 最后一个元素 比 currNum 要小，则数组增加一位
+        // currNum > 最后一个元素，则数组增加一位
         retMap[len] = currNum;
         break;
       }

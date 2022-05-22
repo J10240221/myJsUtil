@@ -9,8 +9,8 @@ function twoSum(nums, target) {
   }
 }
 
-/**
- * 双指针
+/** 
+ * 双指针，好理解
  * @param nums
  * @param target
  * @returns

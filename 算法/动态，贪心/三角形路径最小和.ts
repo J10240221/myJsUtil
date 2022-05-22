@@ -68,10 +68,12 @@ function minimumTotal2(triangle: number[][]): number {
 // ✅dp 终极版本，核心思想就是 从下往上 可以实现 “无后效性”
 function minimumTotal3(triangle: number[][]): number {
   let tailLen = triangle.length;
-  // 从下往上
+  // dp[i][j] 表示从点 (i, j) 到底边的最小路径和。，增加额外的 一行 一列 0，用于辅助计算 最后一行的 情况，哨兵
   const dp: number[][] = new Array(tailLen + 1)
     .fill(0)
     .map((_) => new Array(tailLen + 1).fill(0));
+
+  // 从三角形的最后一行开始递推。
   for (let r = tailLen - 1; r >= 0; r--) {
     for (let c = 0; c <= r; c++) {
       dp[r][c] = triangle[r][c] + Math.min(dp[r + 1][c], dp[r + 1][c + 1]);
