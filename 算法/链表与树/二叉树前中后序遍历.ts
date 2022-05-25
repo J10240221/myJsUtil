@@ -1,3 +1,14 @@
+class TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
+
 /**
  * Definition for a binary tree node.
  * class TreeNode {
@@ -26,6 +37,17 @@ function preorderTraversal(
   }
   return ret;
 }
+
+const arr = [6, 4, 8, 3, 5, 7, 9]
+/*
+     6 
+  4     8
+ 3 5   7 9
+
+ 前序 6 4 3 5 8 7 9
+ 中序 3 4 5 6 7 8 9 (从小到大)
+ 后续 3 5 4 7 9 8 6 
+ */
 
 // 中序：左子树——根节点——右子树
 function inorderTraversal(root: TreeNode | null, ret: number[] = []): number[] {

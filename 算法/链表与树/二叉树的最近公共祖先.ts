@@ -13,25 +13,7 @@
 4、当 left 不为空 ， right 为空 ：与情况 3. 同理；
 
  */
-// TODO:这个难理解一些,另一个好理解些
-function lowestCommonAncestor(
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
-  if (root == null || root == p || root == q) return root;
 
-  // 先序遍历 找到节点
-  const left = lowestCommonAncestor(root.left, p, q);
-  const right = lowestCommonAncestor(root.right, p, q);
-
-  if (left == null && right == null) return null; // 1.
-  if (left == null) return right; // 3.
-  if (right == null) return left; // 4.
-  return root; // 2. if(left != null and right != null)
-}
-
-// 这个好理解些
 function lowestCommonAncestor22(
   root: TreeNode | null,
   p: TreeNode | null,

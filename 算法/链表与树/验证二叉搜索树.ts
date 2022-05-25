@@ -24,26 +24,39 @@
 链接：https://leetcode.cn/problems/validate-binary-search-tree
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 */
 
-
 /* 
-思路
+
+
+     6 
+  4     8
+ 3 5   7 9
+
+ 前序 6 4 3 5 8 7 9
+ 中序 3 4 5 6 7 8 9 (从小到大)
+ 后续 3 5 4 7 9 8 6 
+ 
+ 思路：中序遍历 之后，二叉搜索树 就是 递增排序的
+
 中序遍历时，判断当前节点是否大于中序遍历的前一个节点，如果大于，说明满足 BST，继续遍历；否则直接返回 false。 */
-class Solution {
-    long pre = Long.MIN_VALUE;
-    public boolean isValidBST(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        // 访问左子树
-        if (!isValidBST(root.left)) {
-            return false;
-        }
-        // 访问当前节点：如果当前节点小于等于中序遍历的前一个节点，说明不满足BST，返回 false；否则继续遍历。
-        if (root.val <= pre) {
-            return false;
-        }
-        pre = root.val;
-        // 访问右子树
-        return isValidBST(root.right);
-    }
+/*
+
+ */
+
+function isValidBST(root: TreeNode | null): boolean {
+  let pre = Number.MIN_VALUE;
+  if (root?.val == null) {
+    return true;
+  }
+  // 访问左子树
+  if (!isValidBST(root.left)) {
+    return false;
+  }
+  // 访问当前节点：如果当前节点小于等于中序遍历的前一个节点，说明不满足BST，返回 false；否则继续遍历。
+  if (root.val <= pre) {
+    return false;
+  }
+  pre = root.val;
+  // 访问右子树
+  return isValidBST(root.right);
 }
+// 测试用例 好像 有几个没跑过
