@@ -1,10 +1,11 @@
-const types = ['Array', 'Object', 'Function'];
+const types = ['Array', 'Object', 'Function'] as const;
 
 /**
  * 生成 单个类型判读的函数，属性名为： isObject, isArray
  */
 const typeFuncObj = types.reduce(
   (prev, type) => {
+    // @ts-ignore
     prev[`is${type}`] = (target: any) => ({}.toString.call(target).slice(8, -1) === type);
     return prev;
   },
@@ -18,8 +19,6 @@ const typeFuncObj = types.reduce(
 const { isArray, isObject, isFunction } = typeFuncObj;
 
 const isArrOrObj = (obj: any): obj is any[] | { [k: string]: any } => isArray(obj) || isObject(obj);
-
-const aaa = 123;
 
 const isObjectLike = (target: any): target is object => {
   return target !== null && typeof target === 'object';

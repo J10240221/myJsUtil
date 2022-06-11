@@ -3,7 +3,7 @@
  * @param arr
  * @param depth
  */
-const flatten = (arr: any[], depth = Number.MAX_VALUE) => {
+const flatten = (arr: any[], depth = Number.MAX_SAFE_INTEGER) => {
   let ret: any[] = [];
 
   arr.forEach((item) => {
