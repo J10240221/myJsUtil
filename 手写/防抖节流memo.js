@@ -57,7 +57,7 @@ const memorize = (fn, cacheGenerator = JSON.stringify) => {
     if (cacheMap.has(key)) {
       return cacheMap.get(key);
     }
-    console.log("called");
+    console.log('called');
     const ret = fn.call(this, ...args);
     cacheMap.set(key, ret);
     return ret;

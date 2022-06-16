@@ -4,14 +4,19 @@
  
 
 示例 1：
-
-
-输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输入：matrix = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+]
 输出：[1,2,3,6,9,8,7,4,5]
+
 示例 2：
-
-
-输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输入：matrix = [
+  [1,2,3,4],
+  [5,6,7,8],
+  [9,10,11,12]
+]
 输出：[1,2,3,4,8,12,11,10,9,5,6,7]
 
 来源：力扣（LeetCode）
@@ -44,19 +49,26 @@ function spiralOrder(matrix: number[][]): number[] {
   const ret: number[] = [];
   if (matrix.length === 0) return ret; //若数组为空，直接返回答案
 
-  let u = 0; //赋值上下左右边界
-  let d = matrix.length - 1;
-  let l = 0;
-  let r = matrix[0].length - 1;
+  let upIdx = 0; //赋值上下左右边界
+  let downIdx = matrix.length - 1;
+  let leftIdx = 0;
+  let rightIdx = matrix[0].length - 1;
   while (true) {
-    for (let i = l; i <= r; i++) ret.push(matrix[u][i]); //向右移动直到最右
-    if (++u > d) break; //重新设定上边界，若上边界大于下边界，则遍历遍历完成，下同
-    for (let i = u; i <= d; i++) ret.push(matrix[i][r]); //向下
-    if (--r < l) break; //重新设定有边界
-    for (let i = r; i >= l; i--) ret.push(matrix[d][i]); //向左
-    if (--d < u) break; //重新设定下边界
-    for (let i = d; i >= u; i--) ret.push(matrix[i][l]); //向上
-    if (++l > r) break; //重新设定左边界
+    for (let i = leftIdx; i <= rightIdx; i++) ret.push(matrix[upIdx][i]); //向右移动直到最右
+    ++upIdx;
+    if (upIdx > downIdx) break; //重新设定上边界，若上边界大于下边界，则遍历遍历完成，下同
+
+    for (let i = upIdx; i <= downIdx; i++) ret.push(matrix[i][rightIdx]); //向下
+    --rightIdx;
+    if (rightIdx < leftIdx) break; //重新设定有边界
+
+    for (let i = rightIdx; i >= leftIdx; i--) ret.push(matrix[downIdx][i]); //向左
+    --downIdx;
+    if (downIdx < upIdx) break; //重新设定下边界
+
+    for (let i = downIdx; i >= upIdx; i--) ret.push(matrix[i][leftIdx]); //向上
+    ++leftIdx;
+    if (leftIdx > rightIdx) break; //重新设定左边界
   }
   return ret;
 }

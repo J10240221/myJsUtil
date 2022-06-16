@@ -69,7 +69,9 @@ const canFindRest =
 const exist = (board, word) => {
   const m = board.length;
   const n = board[0].length;
-  const used = new Array(m); // 二维矩阵used，存放bool值
+
+  /** 辅助用的二维矩阵used，存放是否使用过的 bool值 */ 
+  const used = new Array(m); 
   for (let i = 0; i < m; i++) {
     used[i] = new Array(n);
   }
