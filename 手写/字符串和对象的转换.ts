@@ -35,17 +35,22 @@ function isObjOrArr(tar: unknown) {
  * @param params
  */
 function transfer(params: Record<string, any> = input) {
-  function dfs(val: any, currKey: string, ret: Record<string, any>) {
+  const ret: Record<string, any> = {};
+  const EMPTY_KEY = '';
+
+  function dfs(val: any, currKey: string) {
+    const isFirst = currKey === EMPTY_KEY;
+
     if (isObjOrArr(val)) {
       if (isArr(val)) {
         val.forEach((item, index) => {
-          const nextKey = `${currKey}[${index}]`;
-          dfs(item, nextKey, ret);
+          const nextKey = isFirst ? String(index) : `${currKey}[${index}]`;
+          dfs(item, nextKey);
         });
       } else {
         Object.entries(val).forEach(([k, v]) => {
-          const nextKey = `${currKey}.${k}`;
-          dfs(v, nextKey, ret);
+          const nextKey = isFirst ? k : `${currKey}.${k}`;
+          dfs(v, nextKey);
         });
       }
     } else {
@@ -54,11 +59,13 @@ function transfer(params: Record<string, any> = input) {
     }
   }
 
-  const ret = {};
-  Object.entries(params).forEach(([key, val]) => {
-    dfs(val, key, ret);
-  });
+  dfs(params, EMPTY_KEY);
 
+  // Object.entries(params).forEach(([key, val]) => {
+  //   dfs(val, key);
+  // });
+
+  console.log(JSON.stringify(ret));
   return ret;
 }
 
@@ -91,9 +98,9 @@ const output2 = {
 /**
  * 递归版本
  * 思路：key 转变为 string[], 深度赋值，直到 最后一个key 则是出口
- * 
- * @param params 
- * @returns 
+ *
+ * @param params
+ * @returns
  */
 function transferWithRecursion(params = input2) {
   function dfs(keys: string[], val: number, target: any = {}) {
@@ -136,3 +143,5 @@ function transferWithIterator(params = input2) {
 
 console.log(JSON.stringify(transferWithRecursion()) === JSON.stringify(output2));
 console.log(JSON.stringify(transferWithIterator()) === JSON.stringify(output2));
+
+export {};
