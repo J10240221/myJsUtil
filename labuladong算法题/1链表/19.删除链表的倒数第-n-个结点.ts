@@ -81,7 +81,8 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
   let faster: ListNode | null = head;
   let slower: ListNode | null = head;
   while (n >= 0) {
-    // 难点说明指针指向了第一个节点！这是返回第二个节点即可
+    // 难点说明指针指向了第一个节点！这是返回第二个节点即可;
+    // 也可以使用另一种解法：新建一个 dummy 节点，这样就能避免这种特殊处理，简化代码了
     if (faster === null) {
       return head.next;
     }
