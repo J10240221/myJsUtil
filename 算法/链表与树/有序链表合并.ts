@@ -15,7 +15,7 @@ function mergeTwoLists(
   let retList = new ListNode();
   const header = retList;
   while (l1 && l2) {
-    let minner;
+    let minner: ListNode;
     if (l1.val >= l2.val) {
       minner = l2;
       l2 = l2.next;
