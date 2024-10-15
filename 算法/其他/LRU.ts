@@ -1,4 +1,8 @@
 // 需要 O1 的话 只能用链表，但是链表查询是 On,所以需要结合 hash表 + 链表
+/**
+ * 利用 Map 自带LRU排序的特性
+ * 直接使用 Map 即可快捷实现
+ */
 class LRUCache {
   cacheMap: Map<number, number>;
   capacity: number;
@@ -9,10 +13,10 @@ class LRUCache {
 
   get(key: number): number {
     if (this.cacheMap.has(key)) {
-      const value = this.cacheMap.get(key);
+      const value = this.cacheMap.get(key)!;
       this.cacheMap.delete(key);
       this.cacheMap.set(key, value);
-      return this.cacheMap.get(key);
+      return value;
     }
     return -1;
   }
