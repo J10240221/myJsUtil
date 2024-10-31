@@ -48,24 +48,13 @@
  Do not return anything, modify s in-place instead.
  */
 function reverseString(s: string[]): void {
-  const len = s.length;
-  const mid = Math.ceil(len / 2) - 1;
-  /* 考虑奇数
-    1 2 3 4 5
-    i = 0, 1, 2
+  let l = 0;
+  let r = s.length - 1;
+  while (l < r) {
+    [s[l], s[r]] = [s[r], s[l]];
 
-    考虑偶数
-    1 2 3 4 5 6
-    i = 0, 1, 2
-    所以得出 const mid = Math.ceil(len / 2) - 1; && 且 i<=mid
-   */
-  let i = 0;
-  while (i <= mid && i < len) {
-    const head = s[i];
-    const tail = s[len - i - 1];
-    s[i] = tail;
-    s[len - i - 1] = head;
-    i++;
+    l++;
+    r--;
   }
 }
 // @lc code=end
