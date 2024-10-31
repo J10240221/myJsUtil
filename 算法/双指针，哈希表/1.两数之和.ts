@@ -15,7 +15,7 @@ function twoSum(nums, target) {
  * @param target
  * @returns
  */
-function twoSum2(nums: number[], target) {
+function twoSum2(nums: number[], target: number) {
   // 递增排序
   nums.sort((a, b) => a - b);
 
