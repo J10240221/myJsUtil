@@ -47,7 +47,7 @@
  */
 
 // @lc code=start
-function strStr(haystack: string, needle: string): number {
+function strStr1(haystack: string, needle: string): number {
   /* 
   012345
 
@@ -77,4 +77,103 @@ function strStr(haystack: string, needle: string): number {
   }
   return -1;
 }
+
+/**
+ * 太烧脑了，直接放弃吧
+ */
+const getNext = (str: string): number[] => {
+  const next: number[] = [0];
+  let i = 1;
+  let j = 0;
+  while (i < str.length) {
+    /* 
+  # 上面抛弃第一个，标识i结尾的后缀，下面则是前缀，求出最长公共前后缀
+  #1. 不相等，则 记录 next[i]=0, i++, j=0
+   a[b]abc     i = ++   
+     ababc     j = 0    
+  
+  #2. 相等了，记录 next[i] = j+ 1，i++ j++，(即: next[2] = 1)
+  ab[a]bc      i = 2   
+     ababc     j = 0
+     
+  # 还是相等 【同2】 (即: next[3] = 2)
+  ab[ab]c      i = 3
+     ababc     j = 1
+  
+  # 不相等 同【1】(即: next[4] = 0)
+  ab[abc]      i = 2
+     ababc     j = 1
+     */
+    /* 
+ aabaaac
+    aabaaac 
+    0101220
+adcadde
+   adcadde j = 2
+   00012
+     */
+    if (str[i] === str[j]) {
+      next[i] = j + 1;
+      i++;
+      j++;
+    } else {
+      if (j === 0) {
+        next[i] = 0;
+        i++;
+      } else {
+        // 核心！利用已经算出来的 next 去获取j的位置
+        j = next[j - 1];
+      }
+    }
+  }
+  return next;
+};
+//  aabaaac
+// [0, 0, 1, 1, 0]
+[0, 1, 0, 1, 2, 1, 0];
+/**
+ * kmp 版本
+ *
+ */
+function strStr(haystack: string, needle: string): number {
+  const next = getNext(needle);
+  console.log('next', next);
+  /* 
+      abababcaa  i
+      ababc     j
+next=[00120] 
+   */
+  let i = 0;
+  let j = 0;
+  while (i < haystack.length) {
+    if (haystack[i] === needle[j]) {
+      if (j === needle.length - 1) {
+        return i - j;
+      }
+      i++;
+      j++;
+    } else {
+      // 不相等
+      if (j === 0) {
+        i++;
+      } else {
+        j = next[j - 1];
+      }
+    }
+    console.log('i,j', i, j);
+  }
+  return -1;
+}
+
+// console.log(strStr('ppi', 'pi'));
+
+console.log(getNext('aabaaac')); // 最后的a 不匹配却要 是2
+/* 
+aabaaac
+   aabaaac
+adcadde
+   adcadde
+ */
+console.log(getNext('adcadde')); // 最后的d 不匹配却要 是0
+
 // @lc code=end
