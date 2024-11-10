@@ -113,7 +113,7 @@
 function simplifyPath(path: string): string {
   const stack: string[] = [];
 
-  // 已 / 区分去分割： a/b/..///d --> [a, b, .., '', '', d]
+  // 以 / 区分去分割： a/b/..///d --> [a, b, .., '', '', d]
   path.split('/').forEach((item) => {
     switch (item) {
       case '..': {
@@ -135,4 +135,3 @@ function simplifyPath(path: string): string {
   return '/' + stack.join('/');
 }
 // @lc code=end
-simplifyPath('/home/');
