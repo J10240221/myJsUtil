@@ -87,12 +87,57 @@
  * }
  */
 
-function preorderTraversal(root: TreeNode | null, result: number[] = []): number[] {
+/**
+ * 递归版本
+ */
+function preorderTraversal1(root: TreeNode | null): number[] {
+  const traversal = (r: TreeNode | null, res: number[]): void => {
+    if (r === null) return;
+    res.push(r.val);
+    traversal(r.left, res);
+    traversal(r.right, res);
+  };
+  const result: number[] = [];
+  traversal(root, result);
+  return result;
+}
+/**
+ * 迭代版本
+ * 考虑如下二叉树
+ *      5
+ *     4 6
+ *    1 2
+ * 执行结果为： 5 4 1 2 6
+ *
+ * 压栈情况为
+ * ① [5]  --------> 5
+ * ② [6, 4] ------> 5 4
+ * ③ [6, 2, 1] ---> 5 4 1
+ * ③ [6, 2] ------> 5 4 1 2
+ * ③ [6] ---------> 5 4 1 2 6
+ * 所以需要 先压右侧再压左侧
+ *
+ */
+function preorderTraversal(root: TreeNode | null): number[] {
+  const result: number[] = [];
+  const contextStack: TreeNode[] = [];
+
   if (root === null) return result;
 
-  result.push(root.val);
-  preorderTraversal(root.left, result);
-  preorderTraversal(root.right, result);
+  contextStack.push(root);
+
+  while (contextStack.length) {
+    const currContext = contextStack.pop()!;
+    result.push(currContext.val);
+    // 先压栈的。后执行，所以先压 右栈，再左栈
+
+    if (currContext.right) {
+      contextStack.push(currContext.right);
+    }
+    if (currContext.left) {
+      contextStack.push(currContext.left);
+    }
+  }
 
   return result;
 }
