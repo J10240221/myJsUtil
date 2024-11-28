@@ -64,29 +64,30 @@
  * }
  */
 
+/**
+ * 思路：
+ * 遍历自身的时候，把左右节点扔到下一个任务中，确保每次 task 中是所有当前层的 Node
+ */
 function levelOrder(root: TreeNode | null): number[][] {
   const result: number[][] = [];
   let task: (TreeNode | null)[] = [root];
 
-  // 遍历自身的时候，把左右节点扔到下一个任务中
-  const traversal = (tNodeList: (TreeNode | null)[]) => {
+  while (task.length) {
     const singleLevel: number[] = [];
     // 清空先
-    task = [];
-    tNodeList.forEach((it) => {
+    const nextTask: (TreeNode | null)[] = [];
+    task.forEach((it) => {
       if (it) {
         singleLevel.push(it.val);
-        if (it.left) task.push(it.left);
-        if (it.right) task.push(it.right);
+        if (it.left) nextTask.push(it.left);
+        if (it.right) nextTask.push(it.right);
       }
     });
     singleLevel.length && result.push(singleLevel);
     if (task.length) {
-      traversal(task);
+      task = nextTask;
     }
-  };
-
-  traversal(task);
+  }
 
   return result;
 }
