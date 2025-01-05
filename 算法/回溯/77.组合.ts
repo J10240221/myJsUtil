@@ -64,6 +64,7 @@ function combine(n: number, k: number): number[][] {
   const backtrack = (resItem: number[], startC: number) => {
     if (resItem.length === k) {
       result.push([...resItem]);
+      return;
     }
 
     // 确保从小到大，不会有重复
